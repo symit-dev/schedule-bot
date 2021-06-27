@@ -88,7 +88,7 @@ async def sc(client, message):
 @app.on_message(filters.command(["start", "help"]))
 async def my_handler(client, message):
     print(message)
-    await message.reply("Helloooooo")
+    await message.reply("<b>Powered By Telegram Marketing Services.</b>\n<a href='http://wa.me/919472355218?text=Hi,%20I%20got%20your%20contact%20from%20telegram%20bot'>Telegram Marketing Services</a>")
 
 
 scheduler = AsyncIOScheduler()
