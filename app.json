@@ -1,0 +1,31 @@
+{
+    "name": "Message schedule bot",
+    
+    "keywords": [
+      "mangodb",
+      "schedule"
+    ],
+    
+    "env": {
+        "bot_token": {
+            "description": "Your bot token.",
+            "value": ""
+        },
+        "time_zone": {
+            "description": "Enter Time Zone Example - Asia/Kolkata",
+            "value": ""
+        }
+        },
+    "addons": [],
+    "buildpacks": [
+        {
+            "url": "heroku/python"
+        }
+    ],
+    "formation": {
+        "worker": {
+            "quantity": 1,
+            "size": "free"
+        }
+    }
+}
