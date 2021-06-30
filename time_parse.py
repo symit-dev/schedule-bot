@@ -43,6 +43,8 @@ def addMsgToDB(msg):
     "chats":chats
   }
   db = Mango()
+  if db.get_single_data(json_):
+    return "Already Exist"
   db.insert(json_)
   return json_
 
@@ -51,7 +53,7 @@ def addMsgToDB(msg):
 #   addMsgToDB(msg)
 
 
-db = Mango()
+# db = Mango()
 # # # user = {'name': 'sHalil', 'lang': 'Python'}
 # # print(db.insert(json_))  get_single_data get_all_data
 
