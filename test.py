@@ -14,6 +14,7 @@ api_id=1737146,
 bot_token=botToken
 )
 LOG_CHAT = int(os.environ.get('log_chat','-1001196505905'))
+CHECK = dict()
 
 async def job():
     DY = time.strftime('%d/%m/%y')
@@ -58,6 +59,9 @@ async def job():
 
 @app.on_message(filters.command(["add"]))
 async def add(client, message):
+  if message.message_id in CHECK:
+    return
+
     try:
       dl=await client.download_media(message.reply_to_message)
     except Exception as err:
@@ -69,6 +73,9 @@ async def add(client, message):
       await message.reply('Adding to db')
       for msg in data:
         addMsgToDB(msg)
+      await message.reply("Added To DB")
+      CHECK[message.message_id] = "True"
+      return
     except Exception as errr:
       await message.reply("Something is wrong with CSV data Format \nCheck Again ",str(errr))
       return
