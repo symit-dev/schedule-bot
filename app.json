@@ -11,6 +11,12 @@
             "description": "Your bot token.",
             "value": ""
         },
+        
+        "log_chat": {
+            "description": "Your group log chat id.",
+            "value": ""
+        },
+        
         "time_zone": {
             "description": "Enter Time Zone Example - Asia/Kolkata",
             "value": ""
