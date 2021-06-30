@@ -60,7 +60,7 @@ async def job():
 @app.on_message(filters.command(["add"]))
 async def add(client, message):
     if message.message_id in CHECK:
-        await message.reply("Already Added This CSV File in DB)
+        await message.reply("Already Added This CSV File in DB")
         return
 
     try:
