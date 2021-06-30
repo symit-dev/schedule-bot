@@ -59,8 +59,9 @@ async def job():
 
 @app.on_message(filters.command(["add"]))
 async def add(client, message):
-  if message.message_id in CHECK:
-    return
+    if message.message_id in CHECK:
+        await message.reply("Already Added This CSV File in DB)
+        return
 
     try:
       dl=await client.download_media(message.reply_to_message)
@@ -99,7 +100,7 @@ async def my_handler(client, message):
 
 
 scheduler = AsyncIOScheduler()
-scheduler.add_job(job, "interval", seconds=20)
+scheduler.add_job(job, "interval", seconds=25)
 
 scheduler.start()
 app.run()
