@@ -57,18 +57,25 @@ async def job():
 
 @app.on_message(filters.command(['dl']))
 async def download_csv_file(client, message):
-  await message.reply("Downloading Datas from DB")
-  filename = get_csv_schedule_file()
-  await message.reply("Now Uploading To Telegram")
-  await message.reply_document(filename)
+  try:
+    await message.reply("Downloading Datas from DB")
+    filename = get_csv_schedule_file()
+    await message.reply("Now Uploading To Telegram")
+    await message.reply_document(filename)
+  except Exception as err:
+    await message.reply(f"Something got Wrong - {str(err)}")
   return
 
 @app.on_message(filters.command(["del"]))
 async def delete_db(client, message):
   await message.reply("Deleting All tasks from DB")
-  db = Mango()
-  del_ = db.delete_all_data(None)
-  await message.reply(f"Deleted - {del_.deleted_count} Tasks")
+  try:
+    db = Mango()
+    del_ = db.delete_all_data(None)
+    await message.reply(f"Deleted - {del_.deleted_count} Tasks")
+  except:
+    await message.reply("Failed To delete Try again")
+    pass
   return
 
 @app.on_message(filters.command(["add"]))
