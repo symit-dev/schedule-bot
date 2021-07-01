@@ -1,6 +1,6 @@
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from pyrogram import Client, filters
-from db import Mango
+from db import Mango, get_csv_schedule_file
 from csv_read import read_csv
 from time_parse import addMsgToDB
 import time, os
@@ -55,7 +55,21 @@ async def job():
       )
         
 
+@app.on_message(filters.command(['dl']))
+async def download_csv_file(client, message):
+  await message.reply("Downloading Datas from DB")
+  filename = get_csv_schedule_file()
+  await message.reply("Now Uploading To Telegram")
+  await message.reply_document(filename)
+  return
 
+@app.on_message(filters.command(["del"]))
+async def delete_db(client, message):
+  await message.reply("Deleting All tasks from DB")
+  db = Mango()
+  del_ = db.delete_all_data(None)
+  await message.reply(f"Deleted - {del_.deleted_count} Tasks")
+  return
 
 @app.on_message(filters.command(["add"]))
 async def add(client, message):
@@ -71,13 +85,14 @@ async def add(client, message):
 
     try:
       data = read_csv(dl)
-      await message.reply('Adding to db')
+      await message.reply('Adding to db - might take few minutes if task is huge (:')
       for msg in data:
         addMsgToDB(msg)
       await message.reply("Added To DB")
       CHECK[message.message_id] = "True"
       return
     except Exception as errr:
+      print(errr)
       await message.reply("Something is wrong with CSV data Format \nCheck Again ",str(errr))
       return
     
