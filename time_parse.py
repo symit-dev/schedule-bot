@@ -44,6 +44,7 @@ def addMsgToDB(msg):
   }
   db = Mango()
   if db.get_single_data(json_):
+    print("Already Exist")
     return "Already Exist"
   db.insert(json_)
   return json_
