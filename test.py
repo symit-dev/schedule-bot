@@ -71,7 +71,7 @@ async def delete_db(client, message):
   await message.reply("Deleting All tasks from DB")
   try:
     db = Mango()
-    del_ = db.delete_all_data(None)
+    del_ = db.delete_all_data({})
     await message.reply(f"Deleted - {del_.deleted_count} Tasks")
   except:
     await message.reply("Failed To delete Try again")
